@@ -1,0 +1,27 @@
+<h1>Listing registrations</h1>
+
+<table>
+  <tr>
+    <th>Course / Discipline / Rotation</th>
+    <th>Student</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @registrations.each do |registration| %>
+  <tr>
+    <td><%= registration.grade.course.name+" / "+registration.grade.discipline.name+" / "+registration.grade.course.rotation.description %></td>
+    <td><%= registration.student.name %></td>
+    <td><%= registration.active==1?"Sim":"Não" %></td>
+    <td><%= link_to 'Show', registration %></td>
+    <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
+    <td><%= link_to 'Destroy', registration, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Registration', new_registration_path %>

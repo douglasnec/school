@@ -1,0 +1,25 @@
+<%= form_for(@interprise) do |f| %>
+  <% if @interprise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@interprise.errors.count, "error") %> prohibited this interprise from being saved:</h2>
+
+      <ul>
+      <% @interprise.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :fantasy_name %><br />
+    <%= f.text_field :fantasy_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

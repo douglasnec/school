@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course / Discipline / Rotation:</b>
+  <%= @registration.grade.course.name+" / "+@registration.grade.discipline.name+" / "+@registration.grade.course.rotation.description %>
+</p>
+
+<p>
+  <b>Student:</b>
+  <%= @registration.student.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @registration.active==1?"Sim":"Não" %>
+</p>
+
+
+<%= link_to 'Edit', edit_registration_path(@registration) %> |
+<%= link_to 'Back', registrations_path %>

@@ -1,0 +1,40 @@
+<%= form_for(@registration) do |f| %>
+  <% if @registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registration.errors.count, "error") %> prohibited this registration from being saved:</h2>
+
+      <ul>
+      <% @registration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @control == 1 %>
+  <div class="field">  	
+  	<%= check_box_tag "mark_all" %> Do you want register on all disciplines of the chosen course?
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :grade_id, "Course / Disciplines / Rotation" %><br />
+    <%= f.select :grade_id,
+    			 options_for_select(@grades.collect{|p| [p.course.name+" / "+p.discipline.name+" / "+p.course.rotation.description, p.id]},
+    			 { :selected => f.object.grade_id.to_s }) %>
+  </div>
+  <div class="field">
+    <%= f.label :student_id %><br />
+    <%= f.select :student_id,
+    			 options_for_select(@students.collect{|p| [p.name, p.id]},
+    			 { :selected => f.object.student_id.to_s }) %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.select :active,
+    			 options_for_select([['Sim', 1], ['Não', 0]],    			 
+    			 { :selected => f.object.active }) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

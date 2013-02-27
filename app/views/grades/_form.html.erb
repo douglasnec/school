@@ -1,0 +1,34 @@
+<%= form_for(@grade) do |f| %>
+  <% if @grade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@grade.errors.count, "error") %> prohibited this grade from being saved:</h2>
+
+      <ul>
+      <% @grade.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :course_id %><br />
+    <%= f.select :course_id,
+    			 options_for_select(@courses.collect{|p| [p.name+"/"+p.rotation.description, p.id]},
+    			 { :selected => f.object.course_id.to_s }) %>
+  </div>
+  <div class="field">
+    <%= f.label :discipline_id %><br />
+    <%= f.select :discipline_id,
+    			 options_for_select(@disciplines.collect{|p| [p.name, p.id]},
+    			 { :selected => f.object.discipline_id.to_s }) %>
+  </div>  
+  <div class="field">
+    <%= f.label :teacher_id %><br />
+    <%= f.select :teacher_id,
+    			 options_for_select(@teachers.collect{|p| [p.name, p.id]},
+    			 { :selected => f.object.teacher_id.to_s }) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+Teacher.create(:id => 1, :name => "Odete Lima")
+Teacher.create(:id => 2, :name => "Maria Claudia Pedrosa")
+Teacher.create(:id => 3, :name => "Angela de Assis")
+Teacher.create(:id => 4, :name => "Margarete Cruvinel")
+Teacher.create(:id => 5, :name => "Paulo Cesar da Silva")
+Teacher.create(:id => 6, :name => "Julia dos Santos")
+Teacher.create(:id => 7, :name => "Catarina Pedrosa")
+Teacher.create(:id => 8, :name => "Milena Carmen dos Anjos")

@@ -1,0 +1,6 @@
+Student.create(:id => 1, :registration_number => 1, :name => "Marcelo Junior Albuquerque", :interprise_id => 2)
+Student.create(:id => 2, :registration_number => 2, :name => "Fabio Quirino", :interprise_id => 2)
+Student.create(:id => 3, :registration_number => 3, :name => "Mariana Nunes", :interprise_id => 2)
+Student.create(:id => 4, :registration_number => 4, :name => "Cristiane Mello", :interprise_id => 2)
+Student.create(:id => 5, :registration_number => 5, :name => "Valeria Souza", :interprise_id => 2)
+Student.create(:id => 6, :registration_number => 6, :name => "Helena Maria Rosa", :interprise_id => 2)

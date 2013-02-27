@@ -1,0 +1,35 @@
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :interprise_id %><br />
+    <%= f.select :interprise_id,
+    			 options_for_select(@interprises.collect{|p| [p.fantasy_name, p.id]},
+    			 { :selected => f.object.interprise_id.to_s }) %>
+  </div>
+  <div class="field">
+    <%= f.label :rotation_id %><br />
+    <%#= f.select "rotations", options_from_collection_for_select(@rotations, "id", "description"), :html => {:selected => 3}  %>
+    <%= f.select :rotation_id, 
+    			 options_for_select(@rotations.collect{|p| [p.description, p.id]},  
+				 { :selected => f.object.rotation_id.to_s }) %>
+    
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

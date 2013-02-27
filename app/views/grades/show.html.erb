@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @grade.course.name+" / "+@grade.course.rotation.description %>
+</p>
+
+
+<p>
+  <b>Discipline:</b>
+  <%= @grade.discipline.name %>
+</p>
+
+
+<p>
+  <b>Teacher:</b>
+  <%= @grade.teacher.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_grade_path(@grade) %> |
+<%= link_to 'Back', grades_path %>

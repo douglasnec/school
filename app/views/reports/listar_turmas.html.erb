@@ -1,0 +1,31 @@
+<form action="listar_turmas" method="post">
+	Filtrar por : Course 
+	<%=
+		select_tag :course_id, options_for_select(@courses.collect{|p| [p.name+" / "+p.rotation.description, p.id]}), { :include_blank => true}
+	%> 
+	- Teacher
+	<%=
+		select_tag :teacher_id, options_for_select(@teachers.collect{|p| [p.name, p.id]}), {:include_blank => true}
+	%>
+	<input type="submit" value="Find">
+</form>
+
+<div id="result">
+<% 	aux = 0;
+	@registrations.each do |i| %>
+	<% if i.grade_id != aux %>
+			<b><%= "Course: #{i.grade.course.name} / #{i.grade.course.rotation.description}" %><br />
+				<%="Discipline : #{i.grade.discipline.name}" %><br />
+				<%="Teacher : #{i.grade.teacher.name}" %></b><br />
+			<table cellpadding="2" cellspacing="0" border="1" width="35%">
+				<tr><th>Student</th></tr>
+	<% 
+			aux = i.grade_id
+			findStudents(i.grade_id).each do |m| %>
+			<tr><td><%= m.student.name %></td></tr>				
+		<%	end %>
+			</table><br /><br />	
+	<%	end 
+	%>
+<% end %>
+</div>
