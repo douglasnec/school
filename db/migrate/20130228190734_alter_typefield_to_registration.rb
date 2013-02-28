@@ -1,6 +1,5 @@
 class AlterTypefieldToRegistration < ActiveRecord::Migration
-  def up    
-    change_column :registrations, :student_id, :integer    
+  def up        
   end
 
   def down
