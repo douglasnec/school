@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class ResponsiblesController < ApplicationController
   def index
   end
 

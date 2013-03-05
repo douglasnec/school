@@ -1,11 +1,25 @@
 School::Application.routes.draw do
+  get "responsibles/index"
+
+  get "responsibles/new"
+
+  get "responsibles/show"
+
+  get "teachers/index"
+
+  get "teachers/new"
+
+  get "teachers/show"
+
+  get "students/index"
+
+  get "students/new"
+
+  get "students/show"
+
   resources :clientes
 
   resources :registrations
-
-  resources :students
-
-  resources :teachers
 
   resources :grades
 

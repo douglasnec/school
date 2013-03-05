@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227164933) do
-
-  create_table "clientes", :force => true do |t|
-    t.string   "nome"
-    t.string   "cpf"
-    t.string   "rg"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130305203253) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -50,12 +42,24 @@ ActiveRecord::Schema.define(:version => 20130227164933) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "registrations", :force => true do |t|
-    t.integer  "grade_id"
-    t.integer  "student_id"
-    t.integer  "active"
+  create_table "people", :force => true do |t|
+    t.string   "name"
+    t.datetime "birth"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "registrations", :force => true do |t|
+    t.integer  "grade_id"
+    t.string   "student_id", :limit => 50
+    t.integer  "active"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "responsibles", :id => false, :force => true do |t|
+    t.integer "person_id",      :null => false
+    t.integer "responsible_to", :null => false
   end
 
   create_table "rotations", :force => true do |t|
@@ -64,18 +68,9 @@ ActiveRecord::Schema.define(:version => 20130227164933) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "students", :force => true do |t|
-    t.integer  "registration_number"
-    t.string   "name"
-    t.integer  "interprise_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  create_table "teachers", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "students", :id => false, :force => true do |t|
+    t.integer "person_id",       :null => false
+    t.string  "register_number", :null => false
   end
 
 end
