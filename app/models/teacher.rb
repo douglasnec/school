@@ -1,5 +1,4 @@
 class Teacher < ActiveRecord::Base
-  attr_accessible :name
-  
-  has_many :grades
+  # attr_accessible :date_hire
+  inherits_from :person
 end

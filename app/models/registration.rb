@@ -2,8 +2,6 @@ class Registration < ActiveRecord::Base
   attr_accessible :active, :grade_id, :student_id
   validates_uniqueness_of :grade_id, :scope => [:student_id]
   
-  has_many :students
-  
   belongs_to :grade
   belongs_to :student
   

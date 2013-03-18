@@ -1,2 +1,30 @@
-<h1>Students#index</h1>
-<p>Find me in app/views/students/index.html.erb</p>
+<h1>Listing Students</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Birth</th>
+    <th>Registration Number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @students.each do |student| 
+	nasc = student.person.birth.to_date
+%>
+
+  <tr>
+    <td><%= student.person.name %></td>
+    <td><%= nasc.strftime("%m / %b / %Y")%></td>
+    <td><%= student.register_number %></td>
+    <td><%= link_to 'Show', student %></td>
+    <td><%= link_to 'Edit', edit_student_path(student) %></td>
+    <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Student', new_student_path, :class => "btn" %>
