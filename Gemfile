@@ -4,12 +4,12 @@ gem 'rails', '3.2.3'
 gem "class-table-inheritance", "~> 1.3.0"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-# group :development do
+group :development do
   gem 'mysql2'
-#end
-#group :production do 
-#  gem 'pg'
-#end
+end
+group :production do 
+  gem 'pg'
+end
 
 gem "seed_dumper", "~> 0.1.3"
 gem "responders"
