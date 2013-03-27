@@ -1,98 +1,75 @@
 class StudentsController < ApplicationController
   before_filter :loadSelect
-  # GET /students
-  # GET /students.json
+  respond_to :html, :json, :js
+  
   def index
     @students = Student.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
-    end
+    respond_with(@students)
   end
 
-  # GET /students/1
-  # GET /students/1.json
   def show
     @student = Student.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @student }
-    end
+    respond_with(@student)
   end
 
-  # GET /student/new
-  # GET /student/new.json
   def new
     @student = Student.new
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @student }
-    end
-  end
-
-  # GET /students/1/edit
-  def edit
-    logger.debug "The object is #{params}"
-    @student = Student.find(params[:id])
+    2.times{ @student.responsibles.build }
+    @student.addresses.build
+    3.times{ @student.telephones.build }            
+    @acao = 1
+    respond_with(@student)
   end
   
-  def flatten_date_array hash
-    %w(1 2 3).map{ |e| hash["date(#{e}i)"].to_i }
+  def edit
+    @student = Student.find(params[:id])
+    # tratando quantidade dos campos responsibles que por padrão são 2
+    respo = @student.responsibles.count
+    case respo
+    when 0
+      2.times{ @student.responsibles.build }
+    when 1
+      @student.addresses.build
+    end
+    # tratando telephones
+    tels = @student.telephones.count
+    case tels
+      when 1 
+        2.times { @student.telephones.build }
+      when 2
+        @student.telephones.build
+      when 0
+        3.times { @student.telephones.build }  
+    end
+    @acao = 2
   end
-
-  # POST /students
-  # POST /students.json
+  
   def create
-    logger.debug "Before is #{params}"
-    # params[:student][:birth] = params[:student]["birth(1i)"].to_s+"-"+params[:student]["birth(2i)"].to_s+"-"+params[:student]["birth(3i)"].to_s
+    @student = Student.new(params[:student])    
     
-    # logger.debug "After is #{params}"
-    
-    @student = Student.new(params[:student])
-    respond_to do |format|
-      if @student.save
-        format.html { redirect_to students_path, notice: 'Student was successfully created.' }
-        format.json { render json: @student, status: :created, location: @student }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
-    end        
+    flash[:notice] = "Student was successfully created." if @student.save
+    respond_with(@student, :location => students_path)      
   end
 
-  # PUT /students/1
-  # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
-    
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-        format.html { redirect_to students_path, notice: 'Student was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
-    end      
+    @student.update_responsibles_attributes(params)
+    @student.update_attributes(params[:student]) if flash[:notice] = "Student was successfully updated."      
+    respond_with(@student, :location => students_path)      
   end
 
-  # DELETE /students/1
-  # DELETE /students/1.json
   def destroy
     @student = Student.find(params[:id])
     @student.destroy
-
-    respond_to do |format|
-      format.html { redirect_to students_url }
-      format.json { head :no_content }
-    end
+    respond_with(nil, :location => @student)
   end
   
   def loadSelect
     @grades = Grade.all
     @students = Student.all
+  end
+  
+  def addresponsible
+    logger.debug(' ### #{params}') 
   end
 end

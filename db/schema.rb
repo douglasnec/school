@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318175946) do
+ActiveRecord::Schema.define(:version => 20130327164744) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "street"
+    t.string   "number"
+    t.string   "adjunct"
+    t.string   "district"
+    t.integer  "city_id"
+    t.integer  "student_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "type_address"
+  end
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -59,7 +71,8 @@ ActiveRecord::Schema.define(:version => 20130318175946) do
 
   create_table "responsibles", :id => false, :force => true do |t|
     t.integer "person_id",      :null => false
-    t.integer "responsible_to", :null => false
+    t.integer "responsible_to"
+    t.integer "student_id"
   end
 
   create_table "rotations", :force => true do |t|
@@ -78,6 +91,16 @@ ActiveRecord::Schema.define(:version => 20130318175946) do
     t.date     "date_hire"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "telephones", :force => true do |t|
+    t.string   "number"
+    t.integer  "contact"
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.integer  "interprise_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

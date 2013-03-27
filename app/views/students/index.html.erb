@@ -1,30 +1,27 @@
-<h1>Listing Students</h1>
-
+<legend><%=t :Listing %> <%=t :students %></legend>
 <table class="table table-hover">
   <tr>
-    <th>Name</th>
-    <th>Birth</th>
-    <th>Registration Number</th>
+    <th><%=t :name %></th>
+    <th><%=t :birth %></th>
+    <th><%=t :regNumber %></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @students.each do |student| 
-	nasc = student.person.birth.to_date
-%>
+<% @students.each do |student| %>
 
   <tr>
     <td><%= student.person.name %></td>
-    <td><%= nasc.strftime("%m / %b / %Y")%></td>
+    <td><%= l student.birth, :format => :default %></td>
     <td><%= student.register_number %></td>
-    <td><%= link_to 'Show', student %></td>
-    <td><%= link_to 'Edit', edit_student_path(student) %></td>
-    <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to "<i class='icon-list-alt'></i>&nbsp;".html_safe+I18n.t(:Show), student %></td>
+    <td><%= link_to "<i class='icon-edit'></i>&nbsp;".html_safe+I18n.t(:Edit), edit_student_path(student) %></td>
+    <td><%= link_to "<i class='icon-remove'></i>&nbsp;".html_safe+I18n.t(:Destroy), student, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Student', new_student_path, :class => "btn" %>
+<%= link_to I18n.t(:New), new_student_path, :class => "btn" %>

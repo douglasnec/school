@@ -1,20 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Course / Discipline / Rotation:</b>
-  <%= @registration.grade.course.name+" / "+@registration.grade.discipline.name+" / "+@registration.grade.course.rotation.description %>
-</p>
-
-<p>
-  <b>Student:</b>
-  <%= @registration.student.name %>
-</p>
-
-<p>
-  <b>Active:</b>
-  <%= @registration.active==1?"Sim":"Não" %>
-</p>
-
-
-<%= link_to 'Edit', edit_registration_path(@registration) %> |
-<%= link_to 'Back', registrations_path %>
+<legend><%=t :Student %></legend>
+<table class="table table-bordered table-striped responsive-utilities">
+	<tr>
+		<th class="span2"><%=t :regNumber %></th><td class="span2"><%= @student.register_number %></td>
+		<th class="span2"><%=t :name %></th><td colspan="3"><%= @student.name %></td>		
+	</tr>
+	<tr>
+		<th><%=t :birth %></th><td><%=l @student.birth, :format => :default %></td>
+		<th><%=t :course %></th><td colspan="3"><%= @student.registrations.present? ? @student.registrations.grade.course.name : 'Sem matrícula'  %></td>
+	</tr>
+	<% if @student.telephones.present? %>
+		<tr>
+		<%= "<th>Telephone</th><td>#{@student.telephones.first.number} #{type_contact(@student.telephones.first.contact)}</td>".html_safe if @student.telephones.first.present? %>
+		<%= "<th>Telephone</th><td>#{@student.telephones.second.number} #{type_contact(@student.telephones.second.contact)}</td>".html_safe if @student.telephones.second.present? %>
+		<%= "<th>Telephone</th><td>#{@student.telephones.third.number} #{type_contact(@student.telephones.third.contact)}</td>".html_safe if @student.telephones.third.present? %>
+		</tr>
+	<% end %>
+	
+</table>
+<div class="form-actions">
+  <%= link_to I18n.t(:Edit), edit_student_path(@student), :class => "btn" %>&nbsp;
+  <%= link_to I18n.t(:Back), students_path, :class => "btn" %>    
+</div>

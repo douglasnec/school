@@ -1,9 +1,15 @@
 School::Application.routes.draw do
+  resources :telephones
+
+  resources :addresses
+
   resources :teachers
 
   resources :responsibles
   
-  resources :students
+  resources :students do
+    get 'addresponsible'
+  end
     
   resources :clientes
 

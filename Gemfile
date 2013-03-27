@@ -12,6 +12,7 @@ gem "class-table-inheritance", "~> 1.3.0"
 #end
 
 gem "seed_dumper", "~> 0.1.3"
+gem "responders"
 # gem "devise", "~> 2.1.2"
 # gem "devise-encryptable", "~> 0.1.1"
 # gem "paperclip", "~> 3.3.0"

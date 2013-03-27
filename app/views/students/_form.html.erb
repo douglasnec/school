@@ -1,32 +1,110 @@
-<%= form_for(@student) do |f| %>
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@v.errors.count, "error") %> prohibited this student from being saved:</h2>
-
-      <ul>
-      <% @student.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for(@student, :html => {:class => "form-horizontal"}) do |f| %>
+  <div class="row">
+	  <div class="control-group span2">
+	    <label class="control-label"><%= f.label I18n.t(:regNumber) %></label>
+	    <div class="controls"><%= f.text_field :register_number, :class => "span1" %></div>    
+	  </div>
+	  <div class="control-group span5">
+	    <label class="control-label"><%= f.label I18n.t(:name) %></label>
+	    <div class="controls"><%= f.text_field :name, :class => "span8" %></div>    
+	  </div>
+   </div>
+  <div class="control-group">
+    <label class="control-label"  ><%= f.label I18n.t(:birth) %></label>
+    <div class="input-append date" id="datepicker1" style="margin-left: 20px !important;">
+    		<%= f.text_field :birth, 'data-format' => "dd/mm/yyyy", 'readonly' => 'readonly', :class => 'input-date', 'value' =>  values(f.object) %>
+    		<span class="add-on">
+    			<i class="icon-calendar"></i>
+    		</span>
     </div>
-  <% end %>
-  
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :birth %><br />
-    <%= f.text_field :birth, 'data-behaviour' => 'datepicker' %>
+  <div id="telephones">  	
+  	<legend>Telephones</legend>
+  	<%= f.fields_for :telephones do |tel| %>
+  		<div class="control-group">
+  			<label class="control-label"  ><%= tel.label :number %></label>
+  			<div class="controls">
+  				<%= tel.text_field :number, :class => "span2" %>
+  				<%= tel.select :contact, [['Responsible', 1],
+ 											['Student', 2],
+  											['Contact', 3],
+  											['Resident', 4],
+  											['Other', 5]], {}, {:class => "span2"} %>
+  				<%= tel.check_box :_destroy %> Remove							
+  			</div>
+  		</div>
+  	<% end %>
   </div>
-  <div class="field">
-    <%= f.label :register_number %><br />
-    <%= f.text_field :register_number %>
-  </div> 
-  <div class="actions">
-    <%= f.submit %>
+  <div id="addresses">
+  	<legend>Address</legend>
+  	<%= f.fields_for :addresses do |address| %>  		
+	  		<div class="control-group row">
+	  			<div class="group span6">
+	  				<label class="control-label"><%= address.label :street %></label>
+	  				<div class="controls">
+	  					<%= address.text_field :street, :class => "span5" %>
+	  				</div>
+	  			</div>
+	  			<div class="group span2">
+		  			<label class="control-label"><%= address.label :number %></label>
+		  			<div class="controls">
+		  				<%= address.text_field :number, :class => "span1" %>
+		  			</div>
+	  			</div>
+	  			<div class="group span2">
+		  			<label class="control-label"><%= address.label :adjunct %></label>
+		  			<div class="controls">
+		  				<%= address.text_field :adjunct, :class => "span2" %>
+		  			</div>
+	  			</div>  			
+	  		</div>
+  		</div>
+  		<div class="control-group row">
+  			<div class="group span4">
+	  			<label class="control-label"><%= address.label :district %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :district, :class => "span3" %>
+	  			</div>
+  			</div>
+  			<div class="group span4">
+  				<label class="control-label"><%= address.label :city_id %></label>
+  				<div class="controls">
+  					<%= address.select :city_id, [['Goiânia', 1],
+ 											['Aparecida de Goiânia', 2]], :include_blank => false %>
+  				</div>
+  			</div>
+  			<div class="group span3">
+  				<label class="control-label"><%= address.label :type_address %></label>
+  				<div class="controls">
+  					<%= address.select(:type_address, [['Student', 1], ['Responsible', 2]], {}, { :class => "span2" }) %>
+  				</div>
+  			</div>
+  		</div>
+  	<% end %>
+  <div id="responsibles">
+  		<legend>Responsibles</legend>
+	  <%= f.fields_for :responsibles do |resp| %>	  		
+			<div class="control-group">
+				<label class="control-label"><%= resp.label I18n.t(:name) %></label>
+				<div class="controls">
+					<%= resp.text_field :name, :class => "span8" %>
+					<%= resp.check_box :_destroy %> Remove
+				</div>			
+			</div>			
+	  <% end -%>			 
+  </div> 	
+	<div class="form-actions">
+    <%= f.submit I18n.t(:Save), :class => "btn" %>&nbsp;
+    <%= link_to I18n.t(:Back), students_path, :class => "btn" %>
+    <% if @acao == 2 %>
+    	&nbsp;<%= link_to I18n.t(:Show), @student, :class => "btn" %>
+    <% end %>
   </div>
 <% end %>
+
 <script type="text/javascript">
-	$('[data-behaviour~=datepicker]').datepicker();		
+	$('#datepicker1').datepicker({
+		language: 'pt-BR',
+		format: 'dd/mm/yyyy'
+	});		
 </script>
