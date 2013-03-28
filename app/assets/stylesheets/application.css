@@ -1,4 +1,5 @@
 /*
+ *= require bootstrap-datepicker
  *= require_self 
  *= require_tree . 
 */
