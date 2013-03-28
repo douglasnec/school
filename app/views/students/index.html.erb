@@ -1,5 +1,5 @@
 <legend><%=t :Listing %> <%=t :students %></legend>
-<table class="table table-hover">
+<table class="table table-bordered table-striped responsive-utilities">
   <tr>
     <th><%=t :name %></th>
     <th><%=t :birth %></th>
@@ -10,7 +10,6 @@
   </tr>
 
 <% @students.each do |student| %>
-
   <tr>
     <td><%= student.person.name %></td>
     <td><%= l student.birth, :format => :default %></td>
