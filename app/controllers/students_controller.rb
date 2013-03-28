@@ -29,8 +29,9 @@ class StudentsController < ApplicationController
     when 0
       2.times{ @student.responsibles.build }
     when 1
-      @student.addresses.build
+      @student.responsibles.build
     end
+    
     # tratando telephones
     tels = @student.telephones.count
     case tels
@@ -41,6 +42,8 @@ class StudentsController < ApplicationController
       when 0
         3.times { @student.telephones.build }  
     end
+    
+    # tratando address
     @acao = 2
   end
   
