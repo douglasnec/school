@@ -8,7 +8,7 @@ gem "class-table-inheritance", "~> 1.3.0"
 # gem 'mysql2'
 #end
 #group :production do 
-  gem 'pg'
+gem 'pg'
 #end
 
 gem "seed_dumper", "~> 0.1.3"
@@ -25,7 +25,7 @@ group :assets do
   gem "twitter-bootstrap-rails", "~> 2.1.3"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', '~> 0.10.2', :platform => :ruby
+  # gem 'therubyracer', '~> 0.10.2', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -36,7 +36,7 @@ gem "bootstrap-datepicker-rails"
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'
