@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
     @student = Student.new
     2.times{ @student.responsibles.build }
     @student.addresses.build
-    3.times{ @student.telephones.build }            
+    3.times{ @student.telephones.build }
     @acao = 1
     respond_with(@student)
   end

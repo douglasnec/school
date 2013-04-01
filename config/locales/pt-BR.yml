@@ -1,18 +1,56 @@
 pt-BR:
   Listing: Listando
   Editing: Editando
-  student: Aluno
-  students: Alunos
-  birth: Nascimento
-  name: Nome
-  regNumber: Matrícula
   Save: Salvar
   Show: Mostrar
   Edit: Editar
   Destroy: Remover
   Back: Voltar
   New: Novo
+  # Alunos
+  Student: Aluno
+  student: aluno
+  students: Alunos
+  Students: Alunos
+  birth: Nascimento
+  name: Nome
+  regNumber: Matrícula
+  
+  # turnos
+  Rotations: Turnos
+  rotations: turnos
+  Rotation:  Turno
+  rotation:  turno
+  Description: Descrição
       
+  # Empresa
+  Interprise: Empresa
+  interprise: empresa
+  Interprises: Empresas
+  interprises: empresas
+  Name: Nome
+  Fantasy: Nome Fantasia
+  
+  # Telefone
+  Telephones: Telefones
+  Telephone:  Telefone
+  Number:     Número
+  Remove:     Remover
+  Responsible: Responsável
+  Student:    Aluno
+  Contact:    Contato
+  Resident:   Residencial
+  Other:      Outro
+  
+  # Endereço
+  Address: Endereço
+  Street:  Rua
+  Adjunct: Complemento
+  District: Bairro
+  City:    Cidade
+  Type:    Tipo de Endereço
+  Student: Aluno
+  
   date:
     abbr_day_names:
     - Dom

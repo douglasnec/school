@@ -13,9 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-datepicker
+//= require twitter/bootstrap
 // require_tree .
 
 $(document).ready(function(){
-	$('.alert').alert();
 	$('.dropdown-toggle').dropdown();
+	$('.alert').alert();
+	
 })

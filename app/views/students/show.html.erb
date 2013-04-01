@@ -32,12 +32,12 @@
 	</table>
 	<% end %>
 	<% if @student.telephones.present? %>
-		<legend>Telephones</legend>
+		<legend><Telephones><%=t :Telephones %></legend>
 		<table class="table table-bordered table-striped responsive-utilities">
 		<tr>
-		<%= "<th>Telephone</th><td>#{@student.telephones.first.number} #{type_contact(@student.telephones.first.contact)}</td>".html_safe if @student.telephones.first.present? %>
-		<%= "<th>Telephone</th><td>#{@student.telephones.second.number} #{type_contact(@student.telephones.second.contact)}</td>".html_safe if @student.telephones.second.present? %>
-		<%= "<th>Telephone</th><td>#{@student.telephones.third.number} #{type_contact(@student.telephones.third.contact)}</td>".html_safe if @student.telephones.third.present? %>
+		<%= "<th>#{I18n.t(:Telephone)}</th><td>#{@student.telephones.first.number} #{type_contact(@student.telephones.first.contact)}</td>".html_safe if @student.telephones.first.present? %>
+		<%= "<th>#{I18n.t(:Telephone)}</th><td>#{@student.telephones.second.number} #{type_contact(@student.telephones.second.contact)}</td>".html_safe if @student.telephones.second.present? %>
+		<%= "<th>#{I18n.t(:Telephone)}</th><td>#{@student.telephones.third.number} #{type_contact(@student.telephones.third.contact)}</td>".html_safe if @student.telephones.third.present? %>
 		</tr>
 		</table>
 	<% end %>

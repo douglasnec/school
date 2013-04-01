@@ -1,21 +1,13 @@
 <%= form_for(@rotation) do |f| %>
-  <% if @rotation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rotation.errors.count, "error") %> prohibited this rotation from being saved:</h2>
-
-      <ul>
-      <% @rotation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+  <div class="control-group">
+	    <label class="control-label"><%= f.label :description, I18n.t(:Description) %></label>
+    <div class="controls"><%= f.text_field :description %></div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit I18n.t(:Save), :class => "btn" %>&nbsp;
+    <%= link_to I18n.t(:Back), rotations_path, :class => "btn" %>
+    <% if @acao == 2 %>
+    	&nbsp;<%= link_to I18n.t(:Show), @rotation, :class => "btn" %>
+    <% end %>
   </div>
 <% end %>
