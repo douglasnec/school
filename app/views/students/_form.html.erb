@@ -19,18 +19,18 @@
     </div>
   </div>
   <div id="telephones">  	
-  	<legend>Telephones</legend>
+  	<legend><%=t :Telephones %></legend>
   	<%= f.fields_for :telephones do |tel| %>
   		<div class="control-group">
-  			<label class="control-label"  ><%= tel.label :number %></label>
+  			<label class="control-label"  ><%= tel.label :number, I18n.t( :Number ) %></label>
   			<div class="controls">
   				<%= tel.text_field :number, :class => "span2" %>
-  				<%= tel.select :contact, [['Responsible', 1],
- 											['Student', 2],
-  											['Contact', 3],
-  											['Resident', 4],
-  											['Other', 5]], {}, {:class => "span2"} %>
-  				<%= tel.check_box :_destroy %> Remove							
+  				<%= tel.select :contact, [[I18n.t(:Responsible), 1],
+ 											[I18n.t(:Student), 2],
+  											[I18n.t(:Contact), 3],
+  											[I18n.t(:Resident), 4],
+  											[I18n.t(:Other), 5]], {}, {:class => "span2"} %>
+  				<%= tel.check_box :_destroy %> <%=t :Remove %>							
   			</div>
   		</div>
   	<% end %>

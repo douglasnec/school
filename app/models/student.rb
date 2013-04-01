@@ -12,7 +12,7 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, :allow_destroy => true,
                                             :reject_if => proc {|address| address['street'].blank? }
   accepts_nested_attributes_for :telephones, :allow_destroy => true,
-                                            :reject_if => proc {|telephone| telephone['number'].blank? }
+                                            :reject_if => proc {|telephone| telephone['number'].blank? }  
                                                
   def update_responsibles_attributes(params)
     # para cada responsavel

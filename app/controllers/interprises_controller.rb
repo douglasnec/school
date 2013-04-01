@@ -1,83 +1,56 @@
 class InterprisesController < ApplicationController
-  # GET /interprises
-  # GET /interprises.json
+  respond_to :json, :html
   def index
     @interprises = Interprise.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @interprises }
-    end
+    respond_with @interprises
   end
 
-  # GET /interprises/1
-  # GET /interprises/1.json
   def show
     @interprise = Interprise.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @interprise }
-    end
+    respond_with @interprise
   end
 
-  # GET /interprises/new
-  # GET /interprises/new.json
   def new
     @interprise = Interprise.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @interprise }
-    end
+    3.times{ @interprise.telephones.build }
+    @interprise.addresses.build
+    @acao = 1
+    respond_with @interprise
   end
 
-  # GET /interprises/1/edit
   def edit
     @interprise = Interprise.find(params[:id])
+    case @interprise.telephones.count
+    when 2
+      @interprise.telephones.build
+    when 1
+      2.times{ @interprise.telephones.build }
+    when 0
+      3.times{ @interprise.telephones.build }
+    end
+    @interprise.addresses.build if !@interprise.addresses.present?      
+    @acao = 2
   end
 
-  # POST /interprises
-  # POST /interprises.json
   def create
     @interprise = Interprise.new(params[:interprise])
 
-    respond_to do |format|
-      if @interprise.save
-        format.html { redirect_to @interprise, notice: 'Interprise was successfully created.' }
-        format.json { render json: @interprise, status: :created, location: @interprise }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @interprise.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] =  'Interprise was successfully created.' if @interprise.save
+    respond_with @interprise, :location => interprises_path
   end
 
-  # PUT /interprises/1
-  # PUT /interprises/1.json
   def update
     @interprise = Interprise.find(params[:id])
 
-    respond_to do |format|
-      if @interprise.update_attributes(params[:interprise])
-        format.html { redirect_to @interprise, notice: 'Interprise was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @interprise.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Interprise was successfully updated.' if @interprise.update_attributes(params[:interprise])
+    respond_with @interprise
   end
 
-  # DELETE /interprises/1
-  # DELETE /interprises/1.json
   def destroy
     @interprise = Interprise.find(params[:id])
-    @interprise.destroy
-
-    respond_to do |format|
-      format.html { redirect_to interprises_url }
-      format.json { head :no_content }
-    end
+    flash[:notice] = 'Interprise was successfully removed.' if @interprise.destroy
+    respond_with @interprise
   end
 end

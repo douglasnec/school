@@ -1,25 +1,79 @@
 <%= form_for(@interprise) do |f| %>
-  <% if @interprise.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@interprise.errors.count, "error") %> prohibited this interprise from being saved:</h2>
-
-      <ul>
-      <% @interprise.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="row span10">
+	  <div class="control-group span5">
+		<label class="control-label"><%= f.label I18n.t(:name) %></label>
+	    <div class="controls"><%= f.text_field :name, :class => "span5" %></div>
+	  </div>
+	  <div class="control-group span4">
+		<label class="control-label"><%= f.label :fantasy_name, I18n.t(:Fantasy) %></label>
+	    <div class="controls"><%= f.text_field :fantasy_name, :class => "span5" %></div>
+	  </div>
   </div>
-  <div class="field">
-    <%= f.label :fantasy_name %><br />
-    <%= f.text_field :fantasy_name %>
+  <div style="clear:both;"></div>  
+  <div id="telephones">  	
+  	<legend><%=t :Telephones %></legend>
+  	<div class="row span10">
+  	<%= f.fields_for :telephones do |tel| %>  		
+	  		<div class="control-group span3">
+	  			<label class="control-label"  ><%= tel.label :number, I18n.t(:Number) %></label>
+	  			<div class="controls">
+	  				<%= tel.text_field :number, :class => "span2" %>
+  					<%= tel.hidden_field :contact, :value => "5" %>
+	  				<%= tel.check_box :_destroy %> <%=t :Remove %>							
+	  			</div>
+	  		</div>  		
+  	<% end %>
+  	</div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div style="clear:both;"></div>
+  <div id="addresses">
+  	<legend><%=t Address %></legend>
+  	<%= f.fields_for :addresses do |address| %>  		
+		<div class="control-group row">
+			<div class="group span5">
+				<label class="control-label"><%= address.label :street, I18n.t(:Street) %></label>
+				<div class="controls">
+					<%= address.text_field :street, :class => "span5" %>
+				</div>
+			</div>
+			<div class="group span2">
+	  			<label class="control-label"><%= address.label :number, I18n.t(:Number) %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :number, :class => "span1" %>
+	  			</div>
+			</div>
+			<div class="group span2">
+	  			<label class="control-label"><%= address.label :adjunct, I18n.t(:Adjunct) %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :adjunct, :class => "span2" %>
+	  			</div>
+			</div>  			
+		</div>  		
+  		<div class="control-group row">
+  			<div class="group span5">
+	  			<label class="control-label"><%= address.label :district, I18n.t(:District) %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :district, :class => "span5" %>
+	  			</div>
+  			</div>
+  			<div class="group span4">
+  				<label class="control-label"><%= address.label :city_id, I18n.t(:City) %></label>
+  				<div class="controls">
+  					<%= address.select :city_id, [['Goiânia', 1],
+ 											['Aparecida de Goiânia', 2]], :include_blank => false %>
+ 					<%= address.hidden_field :type_address, :value => "3" %>
+  				</div>
+  			</div>  			
+  		</div>
+  	<% end %>
+  	</div>
+  
+  	<div class="form-actions">
+	    <%= f.submit I18n.t(:Save), :class => "btn" %>&nbsp;
+	    <%= link_to I18n.t(:Back), interprises_path, :class => "btn" %>
+	    <% if @acao == 2 %>
+	    	&nbsp;<%= link_to I18n.t(:Show), @interprise, :class => "btn" %>
+	    <% end %>
+  	</div>
 <% end %>
+
