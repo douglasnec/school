@@ -21,7 +21,9 @@ School::Application.routes.draw do
 
   resources :courses
 
-  resources :interprises
+  resources :interprises do 
+    resources :courses
+  end
 
   resources :rotations
 

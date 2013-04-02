@@ -7,6 +7,7 @@ pt-BR:
   Destroy: Remover
   Back: Voltar
   New: Novo
+  Add: Adicionar
   # Alunos
   Student: Aluno
   student: aluno
@@ -50,6 +51,18 @@ pt-BR:
   City:    Cidade
   Type:    Tipo de Endereço
   Student: Aluno
+  
+  # curso
+  Course: Curso
+  Courses: Cursos
+  
+  #disciplinas
+  Disciplines: Disciplinas
+  Discipline: Disciplina
+  
+  # professor
+  Teacher: Professor
+  Teachers: Professores
   
   date:
     abbr_day_names:

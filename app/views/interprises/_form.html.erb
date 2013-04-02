@@ -1,4 +1,4 @@
-<%= form_for(@interprise) do |f| %>
+<%= nested_form_for(@interprise) do |f| %>
   <div class="row span10">
 	  <div class="control-group span5">
 		<label class="control-label"><%= f.label I18n.t(:name) %></label>
@@ -67,7 +67,22 @@
   		</div>
   	<% end %>
   	</div>
-  
+  	<div id="div-courses">
+  		<legend>Courses</legend>
+  		<table id="courses">
+  		<%= f.fields_for :courses, :wrapper => false do |course_form| %>
+  			<% #= render :partial => 'course', :locals => {:f => course_form }%>
+  			<tr class="fields">
+  				<td><%= course_form.text_field :name, :class => "span3" %></td>
+  				<td><%= course_form.select :rotation_id, 
+    			 						options_for_select(@rotations.collect{|p| [p.description, p.id]},  
+				 						{ :selected => course_form.object.rotation_id.to_s }) %></td>
+  				<td><%= course_form.link_to_remove "<i class='icon-remove-sign'></i>".html_safe + "Remove" %></td>
+  			</tr>
+  		<% end %>
+  		</table>
+  		<p><%= f.link_to_add "<i class='icon-plus-sign'></i>".html_safe + "New Course", :courses, "data-target" => "#courses" %></p>
+  	</div>  
   	<div class="form-actions">
 	    <%= f.submit I18n.t(:Save), :class => "btn" %>&nbsp;
 	    <%= link_to I18n.t(:Back), interprises_path, :class => "btn" %>

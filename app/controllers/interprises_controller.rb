@@ -16,6 +16,8 @@ class InterprisesController < ApplicationController
     @interprise = Interprise.new
     3.times{ @interprise.telephones.build }
     @interprise.addresses.build
+    @interprise.courses.build
+    @rotations = Rotation.all
     @acao = 1
     respond_with @interprise
   end
@@ -30,7 +32,8 @@ class InterprisesController < ApplicationController
     when 0
       3.times{ @interprise.telephones.build }
     end
-    @interprise.addresses.build if !@interprise.addresses.present?      
+    @interprise.addresses.build if !@interprise.addresses.present?
+    @rotations = Rotation.all      
     @acao = 2
   end
 

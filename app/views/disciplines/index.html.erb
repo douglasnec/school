@@ -1,8 +1,10 @@
-<h1>Listing disciplines</h1>
+<legend><%=t :Disciplines %></legend>
 
-<table>
+<table  class="table table-bordered table-striped responsive-utilities">
   <tr>
-    <th>Name</th>
+  	<th><%=t :Course %></th>
+    <th><%=t :Discipline %></th>
+    <th><%=t :Teacher %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,14 +12,14 @@
 
 <% @disciplines.each do |discipline| %>
   <tr>
+  	<td><%= show_course(discipline.course_id) %></td>
     <td><%= discipline.name %></td>
-    <td><%= link_to 'Show', discipline %></td>
-    <td><%= link_to 'Edit', edit_discipline_path(discipline) %></td>
-    <td><%= link_to 'Destroy', discipline, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= show_teacher(discipline.teacher_id)%></td>
+    <td><%= link_to "<i class='icon-list-alt'></i>&nbsp;".html_safe+I18n.t(:Show), discipline %></td>
+    <td><%= link_to "<i class='icon-edit'></i>&nbsp;".html_safe+I18n.t(:Edit), edit_discipline_path(discipline) %></td>
+    <td><%= link_to "<i class='icon-remove'></i>&nbsp;".html_safe+I18n.t(:Destroy), discipline, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
 <br />
-
-<%= link_to 'New Discipline', new_discipline_path %>
+<%= link_to I18n.t(:New), new_discipline_path, :class => "btn" %>

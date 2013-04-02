@@ -25,7 +25,7 @@
 	</table>
 	<% end %>
 	<% if @interprise.telephones.present? %>
-		<legend><Telephones><%=t :Telephones %></legend>
+		<legend><%=t :Telephones %></legend>
 		<table class="table table-bordered table-striped responsive-utilities">
 		<tr>
 		<%= "<th class='span2'>#{I18n.t(:Telephone)}</th><td>#{@interprise.telephones.first.number}</td>".html_safe if @interprise.telephones.first.present? %>
@@ -33,6 +33,17 @@
 		<%= "<th class='span2'>#{I18n.t(:Telephone)}</th><td>#{@interprise.telephones.third.number}</td>".html_safe if @interprise.telephones.third.present? %>
 		</tr>
 		</table>
+	<% end %>
+	
+	<% if @interprise.courses.present? %>
+	<legend><%=t :Courses %></legend>
+	<table class="table table-bordered table-striped responsive-utilities">
+		<tr><th><%=t :Course %></th><th><%=t :Rotation %></th></tr>		
+		<% @interprise.courses.each do |courses| %>
+		<% linke = link_to courses.name, edit_course_path(courses.id) %>
+		<%= "<tr><td>#{linke}</td><td>#{find_rotations(courses.rotation_id)}</td></tr>".html_safe %>
+		<% end %>		
+	</table>
 	<% end %>
 <div class="form-actions">
 	<%= link_to I18n.t(:Edit), edit_interprise_path(@interprise), :class => "btn" %> &nbsp;

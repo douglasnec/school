@@ -1,35 +1,40 @@
-<%= form_for(@course) do |f| %>
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
-      <ul>
-      <% @course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+<%= nested_form_for(@course) do |f| %>
+  <div class="row">
+	  <div class="control-group span4">
+		    <label class="control-label"><%= f.label :name %></label>
+	    	<div class="controls"><%= f.text_field :name, :class => "span4" %></div>
+	  </div>
+	  <div class="control-group span3">
+		    <label class="control-label"><%= f.label :rotation_id %></label>
+	    	<div class="controls"><%= f.select :rotation_id, 
+	    			 options_for_select(@rotations.collect{|p| [p.description, p.id]},  
+					 { :selected => f.object.rotation_id.to_s }) %></div>
+	    
+	  </div>
+	  <div class="control-group span3">
+		    <label class="control-label"><%= f.label :interprise_id %></label>
+	    	<div class="controls"><%= f.select :interprise_id,
+	    			 options_for_select(@interprises.collect{|p| [p.fantasy_name, p.id]},
+	    			 { :selected => f.object.interprise_id.to_s }) %></div>
+	  </div>
   </div>
-  <div class="field">
-    <%= f.label :interprise_id %><br />
-    <%= f.select :interprise_id,
-    			 options_for_select(@interprises.collect{|p| [p.fantasy_name, p.id]},
-    			 { :selected => f.object.interprise_id.to_s }) %>
+  <div id="div-disciplines">
+  	<legend><Courses><%=t :Disciplines %></legend>
+  		<table id="disciplines">
+  		<%= f.fields_for :disciplines, :wrapper => false do |discipline_form| %>
+  			<tr class="fields">
+  				<td><%= discipline_form.text_field :name, :class => "span3" %></td>  				
+  				<td><%= discipline_form.link_to_remove "<i class='icon-remove-sign'></i>".html_safe + " #{I18n.t(:Remove)}" %></td>
+  			</tr>
+  		<% end %>
+  		</table>
+  		<p><%= f.link_to_add "<i class='icon-plus-sign'></i>".html_safe + " #{I18n.t(:Add)} #{I18n.t(:Disciplines)}", :disciplines, "data-target" => "#disciplines" %></p>
   </div>
-  <div class="field">
-    <%= f.label :rotation_id %><br />
-    <%#= f.select "rotations", options_from_collection_for_select(@rotations, "id", "description"), :html => {:selected => 3}  %>
-    <%= f.select :rotation_id, 
-    			 options_for_select(@rotations.collect{|p| [p.description, p.id]},  
-				 { :selected => f.object.rotation_id.to_s }) %>
-    
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit I18n.t(:Save), :class => "btn" %>&nbsp;
+    <%= link_to I18n.t(:Back), rotations_path, :class => "btn" %>
+    <% if @acao == 2 %>
+    	&nbsp;<%= link_to I18n.t(:Show), @rotation, :class => "btn" %>
+    <% end %>
   </div>
 <% end %>
