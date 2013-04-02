@@ -32,12 +32,9 @@ class InterprisesController < ApplicationController
     when 0
       3.times{ @interprise.telephones.build }
     end
-<<<<<<< HEAD
+
     @interprise.addresses.build if !@interprise.addresses.present?
     @rotations = Rotation.all      
-=======
-    @interprise.addresses.build if !@interprise.addresses.present?      
->>>>>>> 0e9e25c28c550cb82d6eaf18a531d6d68b6c4546
     @acao = 2
   end
 
