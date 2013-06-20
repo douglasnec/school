@@ -1,2 +1,10 @@
-<h1>Teachers#show</h1>
-<p>Find me in app/views/teachers/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date hire:</b>
+  <%= @teacher.date_hire %>
+</p>
+
+
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<%= link_to 'Back', teachers_path %>

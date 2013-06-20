@@ -1,9 +1,9 @@
-<h1>Listing interprises</h1>
+<legend><%=t :Listing%> <%=t :interprises %></legend>
 
-<table>
+<table  class="table table-bordered table-striped responsive-utilities">
   <tr>
-    <th>Name</th>
-    <th>Fantasy name</th>
+    <th><%=t :Name %></th>
+    <th><%=t :Fantasy %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,13 +13,11 @@
   <tr>
     <td><%= interprise.name %></td>
     <td><%= interprise.fantasy_name %></td>
-    <td><%= link_to 'Show', interprise %></td>
-    <td><%= link_to 'Edit', edit_interprise_path(interprise) %></td>
-    <td><%= link_to 'Destroy', interprise, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to "<i class='icon-list-alt'></i>&nbsp;".html_safe+I18n.t(:Show), interprise %></td>
+    <td><%= link_to "<i class='icon-edit'></i>&nbsp;".html_safe+I18n.t(:Edit), edit_interprise_path(interprise) %></td>
+    <td><%= link_to "<i class='icon-remove'></i>&nbsp;".html_safe+I18n.t(:Destroy), interprise, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
 <br />
-
-<%= link_to 'New Interprise', new_interprise_path %>
+<%= link_to I18n.t(:New), new_interprise_path, :class => "btn" %>

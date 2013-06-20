@@ -3,3 +3,14 @@
 
 en:
   hello: "Hello world"
+  flash:
+    actions:
+      create:
+        notice: "%{resource_name} has been created."
+        alert:  "Double check your form before continuing."
+      update:
+        notice: "%{resouce_name} has been updated."
+        alert:  "Double check your form before continuing."
+      destroy:
+        notice: "%{resource_name} has been removed."
+        alert:  "%{resource_name} couldn't bem removed."

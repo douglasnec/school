@@ -1,15 +1,51 @@
-<p id="notice"><%= notice %></p>
+<legend><%=t :Interprise %></legend>
 
-<p>
-  <b>Name:</b>
-  <%= @interprise.name %>
-</p>
+<table class="table table-bordered table-striped responsive-utilities">
+	<tr>
+		<th class="span2"><%=t :Name %></th>
+		<th class="span2"><%=t :Fantasy %></th>
+	</tr>
+	<tr>
+		<td><%= @interprise.name %></td>
+		<td><%= @interprise.fantasy_name %></td>
+	</tr> 
+</table>
+<% if @interprise.addresses.present? %>
+	<legend><%=t :Address %></legend>
+	<table class="table table-bordered table-striped responsive-utilities">
+		<tr>
+			<%= "<th class='span2'>#{I18n.t(:Street)}</th><td>#{@interprise.addresses.first.street}</td>".html_safe if @interprise.addresses.first.street %>
+			<%= "<th class='span2'>#{I18n.t(:Number)}</th><td>#{@interprise.addresses.first.number}</td>".html_safe if @interprise.addresses.first.number %>
+			<%= "<th class='span2'>#{I18n.t(:Adjunct)}</th><td>#{@interprise.addresses.first.adjunct}</td>".html_safe if @interprise.addresses.first.adjunct %>			
+		</tr>
+		<tr>
+			<%= "<th class='span2'>#{I18n.t(:District)}</th><td>#{@interprise.addresses.first.district}</td>".html_safe if @interprise.addresses.first.district %>
+			<%= "<th class='span2'>#{I18n.t(:City)}</th><td colspan='3'>#{@interprise.addresses.first.city_id}</td>".html_safe if @interprise.addresses.first.city_id %>			
+		</tr>
+	</table>
+	<% end %>
+	<% if @interprise.telephones.present? %>
 
-<p>
-  <b>Fantasy name:</b>
-  <%= @interprise.fantasy_name %>
-</p>
-
-
-<%= link_to 'Edit', edit_interprise_path(@interprise) %> |
-<%= link_to 'Back', interprises_path %>
+		<legend><%=t :Telephones %></legend>
+		<table class="table table-bordered table-striped responsive-utilities">
+		<tr>
+		<%= "<th class='span2'>#{I18n.t(:Telephone)}</th><td>#{@interprise.telephones.first.number}</td>".html_safe if @interprise.telephones.first.present? %>
+		<%= "<th class='span2'>#{I18n.t(:Telephone)}</th><td>#{@interprise.telephones.second.number}</td>".html_safe if @interprise.telephones.second.present? %>
+		<%= "<th class='span2'>#{I18n.t(:Telephone)}</th><td>#{@interprise.telephones.third.number}</td>".html_safe if @interprise.telephones.third.present? %>
+		</tr>
+		</table>
+	<% end %>
+	<% if @interprise.courses.present? %>
+	<legend><%=t :Courses %></legend>
+	<table class="table table-bordered table-striped responsive-utilities">
+		<tr><th><%=t :Course %></th><th><%=t :Rotation %></th></tr>		
+		<% @interprise.courses.each do |courses| %>
+		<% linke = link_to courses.name, edit_course_path(courses.id) %>
+		<%= "<tr><td>#{linke}</td><td>#{find_rotations(courses.rotation_id)}</td></tr>".html_safe %>
+		<% end %>		
+	</table>
+	<% end %>
+<div class="form-actions">
+	<%= link_to I18n.t(:Edit), edit_interprise_path(@interprise), :class => "btn" %> &nbsp;
+	<%= link_to I18n.t(:Back), interprises_path, :class => "btn" %>
+</div>

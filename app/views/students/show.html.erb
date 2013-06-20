@@ -1,2 +1,49 @@
-<h1>Students#show</h1>
-<p>Find me in app/views/students/show.html.erb</p>
+<legend><%=t :Student %></legend>
+<table class="table table-bordered table-striped responsive-utilities">
+	<tr>
+		<th class="span2"><%=t :regNumber %></th><td class="span2"><%= @student.register_number %></td>
+		<th class="span2"><%=t :name %></th><td colspan="3"><%= @student.name %></td>		
+	</tr>
+	<tr>
+		<th><%=t :birth %></th><td><%=l @student.birth, :format => :default %></td>
+		<th><%=t :course %></th><td colspan="3"><%= @student.registrations.present? ? @student.registrations.grade.course.name : 'Sem matrícula'  %></td>
+	</tr>
+</table>
+	<% if @student.responsibles.present? %>
+	<legend>Responsibles</legend>
+	<table class="table table-bordered table-striped responsive-utilities">
+		<%= "<tr><th class='span2'>Name</th><td>#{@student.responsibles.first.name}</td></tr>".html_safe if @student.responsibles.first.present? %>		
+		<%= "<tr><th class='span2'>Name</th><td>#{@student.responsibles.second.name}</td></tr>".html_safe if @student.responsibles.second.present? %>		
+	</table>
+	<% end %>
+	<% if @student.addresses.present? %>
+	<legend>Address</legend>
+	<table class="table table-bordered table-striped responsive-utilities">
+		<tr>
+			<%= "<th class='span2'>Street</th><td>#{@student.addresses.first.street}</td>".html_safe if @student.addresses.first.street %>
+			<%= "<th class='span2'>Number</th><td>#{@student.addresses.first.number}</td>".html_safe if @student.addresses.first.number %>
+			<%= "<th class='span2'>Adjunct</th><td>#{@student.addresses.first.adjunct}</td>".html_safe if @student.addresses.first.adjunct %>			
+		</tr>
+		<tr>
+			<%= "<th class='span2'>District</th><td>#{@student.addresses.first.district}</td>".html_safe if @student.addresses.first.district %>
+			<%= "<th class='span2'>City</th><td>#{@student.addresses.first.city_id}</td>".html_safe if @student.addresses.first.city_id %>
+			<%= "<th class='span2'>Type Address</th><td>#{@student.addresses.first.type_address}</td>".html_safe if @student.addresses.first.type_address %>
+		</tr>
+	</table>
+	<% end %>
+	<% if @student.telephones.present? %>
+		<legend><Telephones><%=t :Telephones %></legend>
+		<table class="table table-bordered table-striped responsive-utilities">
+		<tr>
+		<%= "<th>#{I18n.t(:Telephone)}</th><td>#{@student.telephones.first.number} #{type_contact(@student.telephones.first.contact)}</td>".html_safe if @student.telephones.first.present? %>
+		<%= "<th>#{I18n.t(:Telephone)}</th><td>#{@student.telephones.second.number} #{type_contact(@student.telephones.second.contact)}</td>".html_safe if @student.telephones.second.present? %>
+		<%= "<th>#{I18n.t(:Telephone)}</th><td>#{@student.telephones.third.number} #{type_contact(@student.telephones.third.contact)}</td>".html_safe if @student.telephones.third.present? %>
+		</tr>
+		</table>
+	<% end %>
+	
+</table>
+<div class="form-actions">
+  <%= link_to I18n.t(:Edit), edit_student_path(@student), :class => "btn" %>&nbsp;
+  <%= link_to I18n.t(:Back), students_path, :class => "btn" %>    
+</div>

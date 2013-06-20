@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305203253) do
+ActiveRecord::Schema.define(:version => 20130508001626) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "street"
+    t.string   "number"
+    t.string   "adjunct"
+    t.string   "district"
+    t.integer  "city_id"
+    t.integer  "student_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "type_address"
+    t.integer  "interprise_id"
+    t.integer  "teacher_id"
+  end
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -25,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20130305203253) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "course_id"
+    t.integer  "teacher_id"
   end
 
   create_table "grades", :force => true do |t|
@@ -44,22 +60,22 @@ ActiveRecord::Schema.define(:version => 20130305203253) do
 
   create_table "people", :force => true do |t|
     t.string   "name"
-    t.datetime "birth"
+    t.date     "birth"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "registrations", :force => true do |t|
     t.integer  "grade_id"
-    t.string   "student_id", :limit => 50
+    t.integer  "student_id"
     t.integer  "active"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "responsibles", :id => false, :force => true do |t|
-    t.integer "person_id",      :null => false
-    t.integer "responsible_to", :null => false
+    t.integer "person_id",  :null => false
+    t.integer "student_id"
   end
 
   create_table "rotations", :force => true do |t|
@@ -71,6 +87,24 @@ ActiveRecord::Schema.define(:version => 20130305203253) do
   create_table "students", :id => false, :force => true do |t|
     t.integer "person_id",       :null => false
     t.string  "register_number", :null => false
+  end
+
+  create_table "teachers", :id => false, :force => true do |t|
+    t.integer  "person_id",           :null => false
+    t.date     "date_hire"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "referece_discipline"
+  end
+
+  create_table "telephones", :force => true do |t|
+    t.string   "number"
+    t.string   "contact"
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.integer  "interprise_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

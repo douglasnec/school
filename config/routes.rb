@@ -1,22 +1,16 @@
 School::Application.routes.draw do
-  get "responsibles/index"
+  resources :telephones
 
-  get "responsibles/new"
+  resources :addresses
 
-  get "responsibles/show"
+  resources :teachers
 
-  get "teachers/index"
-
-  get "teachers/new"
-
-  get "teachers/show"
-
-  get "students/index"
-
-  get "students/new"
-
-  get "students/show"
-
+  resources :responsibles
+  
+  resources :students do
+    get 'addresponsible'
+  end
+    
   resources :clientes
 
   resources :registrations
@@ -27,7 +21,9 @@ School::Application.routes.draw do
 
   resources :courses
 
-  resources :interprises
+  resources :interprises do 
+    resources :courses
+  end
 
   resources :rotations
 

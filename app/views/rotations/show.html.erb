@@ -1,10 +1,11 @@
-<p id="notice"><%= notice %></p>
+<legend><%=t :Rotation %></legend>
+<table class="table table-bordered table-striped responsive-utilities">
+  <tr><th><%=t :Description %></th></tr>
+  <tr><td><%= @rotation.description %></td></tr>
+</table>
 
-<p>
-  <b>Description:</b>
-  <%= @rotation.description %>
-</p>
 
-
-<%= link_to 'Edit', edit_rotation_path(@rotation) %> |
-<%= link_to 'Back', rotations_path %>
+<div class="form-actions">
+  <%= link_to I18n.t(:Edit), edit_rotation_path(@rotation), :class => "btn" %>&nbsp;
+  <%= link_to I18n.t(:Back), rotations_path, :class => "btn" %>    
+</div>
