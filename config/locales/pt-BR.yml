@@ -64,7 +64,16 @@ pt-BR:
   # professor
   Teacher: Professor
   Teachers: Professores
+  teacher: professor
+  hire: Contratação
+  date_hire: Contração
+  referece_discipline: Disciplinas Ministradas
   
+  # Menu
+  Register: Cadastro
+  Operational: Operacional
+  Reports: Relatórios
+    
   date:
     abbr_day_names:
     - Dom

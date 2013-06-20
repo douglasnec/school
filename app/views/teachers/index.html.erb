@@ -1,8 +1,9 @@
-<h1>Listing teachers</h1>
-
-<table>
+<legend><%=t :Teachers %></legend>
+<table class="table table-bordered table-striped responsive-utilities">
   <tr>
-    <th>Date hire</th>
+    <th><%=t :name %></th>
+    <th><%=t :hire %></th>    
+    <th><%=t :referece_discipline%>
     <th></th>
     <th></th>
     <th></th>
@@ -10,14 +11,16 @@
 
 <% @teachers.each do |teacher| %>
   <tr>
-    <td><%= teacher.date_hire %></td>
-    <td><%= link_to 'Show', teacher %></td>
-    <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-    <td><%= link_to 'Destroy', teacher, confirm: 'Are you sure?', method: :delete %></td>
+  	<td><%= teacher.name %></td>
+    <td><%= l teacher.date_hire, :format => :default %></td>
+    <td><%= teacher.referece_discipline %></td>
+    <td><%= link_to "<i class='icon-list-alt'></i>&nbsp;".html_safe+I18n.t(:Show), teacher %></td>
+    <td><%= link_to "<i class='icon-edit'></i>&nbsp;".html_safe+I18n.t(:Edit), edit_teacher_path(teacher) %></td>
+    <td><%= link_to "<i class='icon-remove'></i>&nbsp;".html_safe+I18n.t(:Destroy), teacher, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Teacher', new_teacher_path %>
+<%= link_to I18n.t(:New), new_teacher_path, :class => "btn" %>

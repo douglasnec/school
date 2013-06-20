@@ -1,21 +1,110 @@
-<%= form_for(@teacher) do |f| %>
-  <% if @teacher.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
-
-      <ul>
-      <% @teacher.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :date_hire %><br />
-    <%= f.date_select :date_hire %>
+<%= nested_form_for(@teacher) do |f| %>
+  <div class="row">
+  	<div class="control-group span7">
+	    <label class="control-label"><%= f.label I18n.t(:name) %></label>
+	    <div class="controls"><%= f.text_field :name, :class => "span7" %></div>    
+	  </div>
+	  <div class="control-group span3">
+	    <label class="control-label"  ><%= f.label I18n.t(:birth) %></label>
+	    <div class="input-append date" id="datepicker1" style="margin-left: 20px !important;">
+	    		<%= f.text_field :birth, 'data-format' => "dd/mm/yyyy", 'readonly' => 'readonly', :class => 'input-date', 'value' =>  values(f.object) %>
+	    		<span class="add-on">
+	    			<i class="icon-calendar"></i>
+	    		</span>
+	    </div>
+	  </div>	  	  
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+  	<div class="control-group span7">
+	    <label class="control-label"><%= f.label I18n.t(:referece_discipline) %></label>
+	    <div class="controls"><%= f.text_field :referece_discipline, :class => "span7" %></div>    
+	  </div>	  
+	  <div class="control-group span3">
+	    <label class="control-label"  ><%= f.label I18n.t(:date_hire) %></label>
+	    <div class="input-append date" id="datepicker2" style="margin-left: 20px !important;">
+	    		<%= f.text_field :date_hire, 'data-format' => "dd/mm/yyyy", 'readonly' => 'readonly', :class => 'input-date', 'value' =>  values(f.object) %>
+	    		<span class="add-on">
+	    			<i class="icon-calendar"></i>
+	    		</span>
+	    </div>
+	  </div>	  
+  </div>
+  
+  <div id="telephones">  	
+  	<legend><%=t :Telephones %></legend>
+  	<div class="row">
+  	<%= f.fields_for :telephones do |tel| %>
+  		<div class="control-group span3">
+  			<label class="control-label"  ><%= tel.label :number, I18n.t( :Number ) %></label>
+  			<div class="controls">
+  				<%= tel.text_field :number, :class => "span2" %>
+  				<%= tel.hidden_field :contact, :value => "3" %>
+  				<%= tel.check_box :_destroy %> <%=t :Remove %>							
+  			</div>
+  		</div>
+  	<% end %>
+  	</div>
+  </div>
+  
+  <div id="addresses">
+  	<legend><%=t Address %></legend>
+  	<%= f.fields_for :addresses do |address| %>  		
+	  	<div class="control-group row">
+  			<div class="group span6">
+  				<label class="control-label"><%= address.label :street, I18n.t(:Street) %></label>
+  				<div class="controls">
+  					<%= address.text_field :street, :class => "span5" %>
+  				</div>
+  			</div>
+  			<div class="group span2">
+	  			<label class="control-label"><%= address.label :number, I18n.t(:Number) %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :number, :class => "span1" %>
+	  			</div>
+  			</div>
+  			<div class="group span2">
+	  			<label class="control-label"><%= address.label :adjunct, I18n.t(:Adjunct) %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :adjunct, :class => "span2" %>
+	  			</div>
+  			</div>  		
+  		</div>
+  		<div class="control-group row">
+  			<div class="group span4">
+	  			<label class="control-label"><%= address.label :district, I18n.t(:District) %></label>
+	  			<div class="controls">
+	  				<%= address.text_field :district, :class => "span3" %>
+	  			</div>
+  			</div>
+  			<div class="group span4">
+  				<label class="control-label"><%= address.label :city_id, I18n.t(:City) %></label>
+  				<div class="controls">
+  					<%= address.select :city_id, [['Goiânia', 1],
+ 											['Aparecida de Goiânia', 2]], :include_blank => false %>
+  				</div>
+  			</div>
+  			<div class="group span3">
+  				<label class="control-label"><%= address.label :type_address, I18n.t(:Type) %></label>
+  				<div class="controls">
+  					<%= address.text_field :type_address, :class => "span2" %>
+  				</div>
+  			</div>
+  		</div>
+  	<% end %>
+  	</div>
+  
+  <div class="form-actions">
+    <%= f.submit I18n.t(:Save), :class => "btn" %>&nbsp;
+    <%= link_to I18n.t(:Back), teachers_path, :class => "btn" %>
+    <% if @acao == 2 %>
+    	&nbsp;<%= link_to I18n.t(:Show), @teachers, :class => "btn" %>
+    <% end %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+	$('#datepicker1, #datepicker2').datepicker({
+		language: 'pt-BR',
+		format: 'dd/mm/yyyy'
+	});		
+</script>

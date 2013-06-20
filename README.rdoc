@@ -1,3 +1,13 @@
 criar o seu config/database.yml
 executar as importações do seeds.rb
 
+# subir pro heroku
+git push heroku master
+
+# usar sql no heroku
+heroku sql
+
+# para instalar esse plugin digite
+heroku plugins:install git://github.com/ddollar/heroku-sql-console.git
+	
+
